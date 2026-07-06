@@ -1,0 +1,35 @@
+name: Descarga semanal PortWatch
+
+on:
+  schedule:
+    - cron: "0 10 * * 3"      # miércoles 10:00 UTC = 5:00 am Bogotá
+  workflow_dispatch:           # botón para dispararlo a mano
+
+permissions:
+  contents: write              # permiso para guardar el snapshot en el repo
+
+jobs:
+  descargar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install requests pandas
+
+      - name: Ejecutar descarga
+        run: python src/descargar.py
+
+      - name: Guardar snapshot en el repo
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "actions@github.com"
+          git add data/
+          git commit -m "Snapshot $(date +%F)" || echo "Sin cambios que guardar"
+          git push
