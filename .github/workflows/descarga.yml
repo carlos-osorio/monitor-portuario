@@ -34,7 +34,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sin cambios que guardar (caso benigno, no es un error)"
           else
-            git commit -m "Snapshot $(date +%F)"
+            git commit -m "Snapshot $(TZ=America/Bogota date +%F)"
             git pull --rebase origin main
             git push
           fi
