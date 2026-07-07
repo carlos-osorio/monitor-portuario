@@ -1,6 +1,7 @@
 """Descarga las series de PortWatch para los puertos v1 y guarda un snapshot fechado."""
 
-from datetime import date
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 import pandas as pd
@@ -57,7 +58,8 @@ def main() -> None:
 
     carpeta = Path("data")
     carpeta.mkdir(exist_ok=True)
-    archivo = carpeta / f"portwatch_{date.today().isoformat()}.csv"
+    hoy_bogota = datetime.now(ZoneInfo("America/Bogota")).date()
+    archivo = carpeta / f"portwatch_{hoy_bogota.isoformat()}.csv"
     datos.to_csv(archivo, index=False)
     print(f"Guardadas {len(datos)} filas en {archivo}")
 
