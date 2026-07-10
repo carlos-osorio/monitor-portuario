@@ -58,7 +58,7 @@ def main():
         md += [linea_puerto(puerto, d), ""]
 
     md += ["---",
-           "**Cómo leer este reporte.**"
+           "**Cómo leer este reporte:**",
            "- El *patrón esperado* es la mediana de las 13 semanas previas de cada puerto.",
            "- *z* mide la desviación de la semana en unidades robustas (mediana/MAD por puerto).",
            "- Se alerta por **caídas abruptas** (z ≤ −3) y por **caídas sostenidas** (CUSUM).",
