@@ -58,10 +58,11 @@ def main():
         md += [linea_puerto(puerto, d), ""]
 
     md += ["---",
-           "**Cómo leer este reporte.** El patrón esperado es la mediana de las 13 "
-           "semanas previas de cada puerto; z mide la desviación en unidades robustas. "
-           "Se alerta por caídas abruptas (z ≤ −3) y por caídas sostenidas (CUSUM). "
-           "Las semanas festivas (fin/inicio de año) se reportan sin alertar.",
+           "**Cómo leer este reporte.**
+           "- El *patrón esperado* es la mediana de las 13 semanas previas de cada puerto.",
+           "- *z* mide la desviación de la semana en unidades robustas (mediana/MAD por puerto).",
+           "- Se alerta por **caídas abruptas** (z ≤ −3) y por **caídas sostenidas** (CUSUM).",
+           "- Las semanas festivas (fin/inicio de año) se reportan sin alertar.",
            "",
            "**Limitaciones.** Datos estimados por el IMF a partir de señales AIS; "
            "sujetos a revisión. Detección con 10–14 días de rezago: este monitor "
