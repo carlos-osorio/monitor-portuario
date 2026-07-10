@@ -5,6 +5,16 @@ reciente arriba. Complementa al README (qué es y cómo se opera el sistema);
 aquí vive el *porqué* de lo no evidente.
 
 ---
+
+## 2026-07-10 - Recalculo de topes impo/expo/portcalls
+
+**Contexto:** Topes iniciales calibrados contra percentil e intuición quedaron al filo del máximo histórico; recalibrados a máx × 1.5 (portcalls 40, import 370.000, export 320.000). 
+
+**Lección:** umbrales de advertencia se anclan al extremo observado, no al valor típico
+
+
+---
+
 ## 2026-07-06 — Confusión Rerun jobs con Run workflow
 
 **Contexto:** eRe-run jobs re-ejecuta el commit original de la corrida, no el estado actual de main; tres 'fallas' consecutivas eran la versión pre-arreglo repitiéndose.
