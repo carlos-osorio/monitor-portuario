@@ -20,8 +20,8 @@ ESTADOS = {
 def linea_puerto(nombre, d):
     desv = 100 * (d["import_semana"] - d["baseline"]) / d["baseline"]
     partes = [f"**{nombre}** — {ESTADOS[d['episodio']['estado']]}",
-              f"Importaciones: {d['import_semana']:,} t "
-              f"({desv:+.0f}% vs. patrón de {d['baseline']:,} t; z = {d['z']})"]
+              f"Importaciones: {d['import_semana']:,} ton. "
+              f"({desv:+.0f}% vs. patrón de {d['baseline']:,} ton.; z = {d['z']})"]
     ep = d["episodio"]
     if ep["estado"] == "en_curso":
         partes.append(f"Bajo su patrón desde {ep['inicio']} ({ep['semanas']} semanas)")
