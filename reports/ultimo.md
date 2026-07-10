@@ -14,7 +14,8 @@ Importaciones: 350,920 ton. (+10% vs. patrón de 318,933 ton.; z = 0.93)
 Importaciones: 105,708 ton. (+52% vs. patrón de 69,406 ton.; z = 0.92)
 
 ---
-**Cómo leer este reporte.**- El *patrón esperado* es la mediana de las 13 semanas previas de cada puerto.
+**Cómo leer este reporte:**
+- El *patrón esperado* es la mediana de las 13 semanas previas de cada puerto.
 - *z* mide la desviación de la semana en unidades robustas (mediana/MAD por puerto).
 - Se alerta por **caídas abruptas** (z ≤ −3) y por **caídas sostenidas** (CUSUM).
 - Las semanas festivas (fin/inicio de año) se reportan sin alertar.
