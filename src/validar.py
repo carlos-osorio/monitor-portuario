@@ -21,8 +21,8 @@ REZAGO_ADVIERTE_DIAS = 16          # un ciclo de publicación perdido
 REZAGO_GRITA_DIAS = 30             # fuente presuntamente muerta
 TOPES_DIARIOS = {                  # umbral superior de plausibilidad (criterio de dominio)
     "portcalls": 25,               # TODO Carlos: fijar con tu criterio
-    "import": 400_000,             # TODO Carlos: toneladas/día máximas creíbles
-    "export": 400_000,             # TODO Carlos
+    "import": 250_000,             # TODO Carlos: toneladas/día máximas creíbles
+    "export": 250_000,             # TODO Carlos
 }
 NUMERICAS = ["portcalls", "portcalls_container", "import", "export"]
 
