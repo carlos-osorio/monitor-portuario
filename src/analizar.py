@@ -97,9 +97,16 @@ def main():
 
         s_exp = (df[df["portname"] == puerto].set_index("date")["export"]
                  .resample("W").sum().iloc[:-1])
-        base_exp = s_exp.rolling(K_VENTANA).median().shift(1).iloc[-1]
         info["export_semana"] = int(s_exp.iloc[-1])
-        info["export_baseline"] = int(base_exp)
+        info["export_baseline"] = int(s_exp.rolling(K_VENTANA).median().shift(1).iloc[-1])
+        z_exp = z_modificado(s_exp)
+        cus_exp = cusum_negativo(z_exp)
+        z_exp_hoy = float(z_exp.iloc[-1])
+        info["export_z"] = round(z_exp_hoy, 2)
+        info["export_choque_caida"] = bool(z_exp_hoy <= -Z_CHOQUE) and not es_festiva
+        info["export_nota_subida"] = bool(z_exp_hoy >= Z_CHOQUE) and not es_festiva
+        info["export_episodio"] = (estado_episodio(cus_exp) if not es_festiva
+                                   else {"estado": "suspendido_festivo"})
       
         if es_festiva:
             info["episodio"] = {"estado": "suspendido_festivo"}
