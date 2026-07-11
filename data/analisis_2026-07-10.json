@@ -13,7 +13,13 @@
         "estado": "normal"
       },
       "export_semana": 43113,
-      "export_baseline": 36642
+      "export_baseline": 36642,
+      "export_z": 0.24,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
     },
     "Buenaventura": {
       "import_semana": 203561,
@@ -26,7 +32,13 @@
         "estado": "normal"
       },
       "export_semana": 58827,
-      "export_baseline": 20219
+      "export_baseline": 20219,
+      "export_z": 2.07,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
     },
     "Cartagena": {
       "import_semana": 350920,
@@ -39,7 +51,13 @@
         "estado": "normal"
       },
       "export_semana": 285075,
-      "export_baseline": 365416
+      "export_baseline": 365416,
+      "export_z": -1.63,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
     },
     "Santa Marta": {
       "import_semana": 105708,
@@ -52,7 +70,13 @@
         "estado": "normal"
       },
       "export_semana": 15928,
-      "export_baseline": 23204
+      "export_baseline": 23204,
+      "export_z": -0.37,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
     }
   },
   "sombra": {
