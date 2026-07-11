@@ -22,6 +22,11 @@ def linea_puerto(nombre, d):
     partes = [f"**{nombre}** — {ESTADOS[d['episodio']['estado']]}",
               f"Importaciones: {d['import_semana']:,} ton. "
               f"({desv:+.0f}% vs. patrón de {d['baseline']:,} ton.; z = {d['z']})"]
+    if "export_semana" in d:                          # ← el bloque nuevo va AQUÍ
+        desv_e = 100 * (d["export_semana"] - d["export_baseline"]) / d["export_baseline"]
+        partes.append(f"Exportaciones: {d['export_semana']:,} ton "
+                      f"({desv_e:+.0f}% vs. patrón de {d['export_baseline']:,} ton) "
+                      f"— *informativo, detección en calibración*")
     ep = d["episodio"]
     if ep["estado"] == "en_curso":
         partes.append(f"Bajo su patrón desde {ep['inicio']} ({ep['semanas']} semanas)")
