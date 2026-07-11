@@ -11,7 +11,9 @@
       "cusum": -0.06,
       "episodio": {
         "estado": "normal"
-      }
+      },
+      "export_semana": 43113,
+      "export_baseline": 36642
     },
     "Buenaventura": {
       "import_semana": 203561,
@@ -22,7 +24,9 @@
       "cusum": -0.79,
       "episodio": {
         "estado": "normal"
-      }
+      },
+      "export_semana": 58827,
+      "export_baseline": 20219
     },
     "Cartagena": {
       "import_semana": 350920,
@@ -33,7 +37,9 @@
       "cusum": 0.0,
       "episodio": {
         "estado": "normal"
-      }
+      },
+      "export_semana": 285075,
+      "export_baseline": 365416
     },
     "Santa Marta": {
       "import_semana": 105708,
@@ -44,7 +50,9 @@
       "cusum": 0.0,
       "episodio": {
         "estado": "normal"
-      }
+      },
+      "export_semana": 15928,
+      "export_baseline": 23204
     }
   },
   "sombra": {

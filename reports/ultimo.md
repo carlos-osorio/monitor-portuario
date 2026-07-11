@@ -2,16 +2,20 @@
 *Generado automáticamente el 2026-07-10. Datos: IMF PortWatch (estimados satelitales, rezago ~10 días; ver limitaciones abajo).*
 
 **Barranquilla** — 🟢 Normal  
-Importaciones: 160,814 ton. (+29% vs. patrón de 124,485 ton.; z = 0.77)
+Importaciones: 160,814 ton. (+29% vs. patrón de 124,485 ton.; z = 0.77)  
+Exportaciones: 43,113 ton (+18% vs. patrón de 36,642 ton) — *informativo, detección en calibración*
 
 **Buenaventura** — 🟢 Normal  
-Importaciones: 203,561 ton. (-19% vs. patrón de 250,848 ton.; z = -1.06)
+Importaciones: 203,561 ton. (-19% vs. patrón de 250,848 ton.; z = -1.06)  
+Exportaciones: 58,827 ton (+191% vs. patrón de 20,219 ton) — *informativo, detección en calibración*
 
 **Cartagena** — 🟢 Normal  
-Importaciones: 350,920 ton. (+10% vs. patrón de 318,933 ton.; z = 0.93)
+Importaciones: 350,920 ton. (+10% vs. patrón de 318,933 ton.; z = 0.93)  
+Exportaciones: 285,075 ton (-22% vs. patrón de 365,416 ton) — *informativo, detección en calibración*
 
 **Santa Marta** — 🟢 Normal  
-Importaciones: 105,708 ton. (+52% vs. patrón de 69,406 ton.; z = 0.92)
+Importaciones: 105,708 ton. (+52% vs. patrón de 69,406 ton.; z = 0.92)  
+Exportaciones: 15,928 ton (-31% vs. patrón de 23,204 ton) — *informativo, detección en calibración*
 
 ---
 **Cómo leer este reporte:**
