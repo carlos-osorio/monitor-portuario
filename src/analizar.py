@@ -93,6 +93,14 @@ def main():
             "cusum": round(float(cus.iloc[-1]), 2),
             "episodio": estado_episodio(cus),
         }
+
+
+        s_exp = (df[df["portname"] == puerto].set_index("date")["export"]
+                 .resample("W").sum().iloc[:-1])
+        base_exp = s_exp.rolling(K_VENTANA).median().shift(1).iloc[-1]
+        info["export_semana"] = int(s_exp.iloc[-1])
+        info["export_baseline"] = int(base_exp)
+      
         if es_festiva:
             info["episodio"] = {"estado": "suspendido_festivo"}
         resultado["puertos"][puerto] = info
