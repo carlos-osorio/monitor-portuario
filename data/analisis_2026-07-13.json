@@ -1,0 +1,117 @@
+{
+  "semana_analizada": "2026-06-28",
+  "excepcion_festiva": false,
+  "puertos": {
+    "Barranquilla": {
+      "import_semana": 160814,
+      "baseline": 124485,
+      "z": 0.77,
+      "choque_caida": false,
+      "nota_subida": false,
+      "cusum": -0.06,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 43113,
+      "export_baseline": 36642,
+      "export_z": 0.24,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Buenaventura": {
+      "import_semana": 203561,
+      "baseline": 250848,
+      "z": -1.06,
+      "choque_caida": false,
+      "nota_subida": false,
+      "cusum": -0.79,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 58827,
+      "export_baseline": 20219,
+      "export_z": 2.07,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Cartagena": {
+      "import_semana": 350920,
+      "baseline": 318933,
+      "z": 0.93,
+      "choque_caida": false,
+      "nota_subida": false,
+      "cusum": 0.0,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 285075,
+      "export_baseline": 365416,
+      "export_z": -1.63,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Santa Marta": {
+      "import_semana": 105708,
+      "baseline": 69406,
+      "z": 0.92,
+      "choque_caida": false,
+      "nota_subida": false,
+      "cusum": 0.0,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 15928,
+      "export_baseline": 23204,
+      "export_z": -0.37,
+      "export_choque_caida": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    }
+  },
+  "sombra": {
+    "Barranquilla": {
+      "pronostico": [
+        124485,
+        124485,
+        124485,
+        124485
+      ]
+    },
+    "Buenaventura": {
+      "pronostico": [
+        243074,
+        243074,
+        243074,
+        243074
+      ]
+    },
+    "Cartagena": {
+      "pronostico": [
+        327042,
+        327042,
+        327042,
+        327042
+      ]
+    },
+    "Santa Marta": {
+      "pronostico": [
+        73427,
+        73427,
+        73427,
+        73427
+      ]
+    }
+  },
+  "sombra_error_mape_pct": {}
+}
