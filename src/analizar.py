@@ -94,7 +94,7 @@ def main():
             "baseline": int(s.rolling(K_VENTANA).median().shift(1).iloc[-1]),
             "z": round(z_hoy, 2),
             "choque_caida": bool(z_hoy <= -Z_CHOQUE) and not es_festiva,
-            "alerta_piso": = bajo_piso(s) and not es_festiva,
+            "alerta_piso":  bajo_piso(s) and not es_festiva,
             "nota_subida": bool(z_hoy >= Z_CHOQUE) and not es_festiva,
             "cusum": round(float(cus.iloc[-1]), 2),
             "episodio": estado_episodio(cus),
