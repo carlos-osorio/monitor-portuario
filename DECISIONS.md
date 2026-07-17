@@ -5,7 +5,25 @@ reciente arriba. Complementa al README (qué es y cómo se opera el sistema);
 aquí vive el *porqué* de lo no evidente.
 
 ---
+## 2026-07-17 — Regla de piso: red de seguridad contra la ceguera del z
 
+**Problema:** en series de alta dispersión acotadas en cero (Barranquilla-expo,
+MAD/mediana ≈ 0,5), el z de choque no puede alcanzar -3 ni ante un colapso total
+—el piso en cero está a ~1,3 MAD de la mediana—. El z dio -1,19 ("normal") ante
+una caída del 94% real (semana 2026-07-05, percentil 1-2 histórico).
+
+**Regla:** si la semana cae bajo el percentil 1 móvil (ventana 52 sem, solo
+pasado) del puerto, se emite advertencia —independiente del z—. Aplica a impo y
+expo; suspendida en semanas festivas.
+
+**Calibración (backtest, notebook 05):** P1 caza la semana 2026-07-05 de
+Barranquilla-expo; tasa ~4,5/año (impo) y ~6/año (expo); >95% de sus alertas
+son invisibles al z (complementa, no duplica). P2/P3 saturan. Sin condición de
+magnitud en v1: la regla solo advierte, el costo de una alerta de más es bajo y
+el de perder un colapso es justo el agujero que cierra. Condición de magnitud
+(caída ≥40% además de bajo piso) queda para v1.5 si resulta ruidosa en operación.
+
+---
 ## 2026-07-10 - Recalculo de topes impo/expo/portcalls
 
 **Contexto:** Topes iniciales calibrados contra percentil e intuición quedaron al filo del máximo histórico; recalibrados a máx × 1.5 (portcalls 40, import 370.000, export 320.000). 
