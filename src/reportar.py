@@ -37,7 +37,7 @@ def linea_puerto(nombre, d):
         if d.get("export_choque_caida"):
             partes.append("⚠ Caída abrupta en exportaciones esta semana")
         if d.get("export_alerta_piso"):
-        partes.append("⚠ Exportaciones en mínimo histórico (bajo P1 del puerto)")
+            partes.append("⚠ Exportaciones en mínimo histórico (bajo P1 del puerto)")
     ep = d["episodio"]
     if ep["estado"] == "en_curso":
         partes.append(f"Bajo su patrón desde {ep['inicio']} ({ep['semanas']} semanas)")
