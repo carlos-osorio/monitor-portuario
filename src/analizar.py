@@ -26,7 +26,8 @@ CUSUM_H = 5.0
 SEMANAS_FESTIVAS = {51, 52, 1, 2}
 INDICADOR = "import"
 HORIZONTE_SOMBRA = 4          # semanas del pronóstico no publicado
-
+PISO_PERCENTIL = 0.01      # regla de piso: semana bajo P1 histórico → advertencia (cubre ceguera del z, ver DECISIONS.md)
+PISO_VENTANA = 52          # semanas de historia para estimar el percentil
 
 def serie_semanal(df):
     """Series semanales del indicador por puerto, sin la semana parcial."""
@@ -50,6 +51,10 @@ def cusum_negativo(z):
         out.append(s)
     return pd.Series(out, index=z.index)
 
+def bajo_piso(serie):
+    """True si la última semana cae bajo el percentil P1 de las 52 semanas anteriores (solo pasado)."""
+    piso = serie.rolling(PISO_VENTANA, min_periods=26).quantile(PISO_PERCENTIL).shift(1)
+    return bool(serie.iloc[-1] < piso.iloc[-1]) if pd.notna(piso.iloc[-1]) else False
 
 def estado_episodio(cus):
     """Estado del episodio CUSUM al cierre de la serie de un puerto."""
@@ -89,6 +94,7 @@ def main():
             "baseline": int(s.rolling(K_VENTANA).median().shift(1).iloc[-1]),
             "z": round(z_hoy, 2),
             "choque_caida": bool(z_hoy <= -Z_CHOQUE) and not es_festiva,
+            "alerta_piso" = bajo_piso(s) and not es_festiva,
             "nota_subida": bool(z_hoy >= Z_CHOQUE) and not es_festiva,
             "cusum": round(float(cus.iloc[-1]), 2),
             "episodio": estado_episodio(cus),
@@ -104,6 +110,7 @@ def main():
         z_exp_hoy = float(z_exp.iloc[-1])
         info["export_z"] = round(z_exp_hoy, 2)
         info["export_choque_caida"] = bool(z_exp_hoy <= -Z_CHOQUE) and not es_festiva
+        info["export_alerta_piso"] = bajo_piso(s_exp) and not es_festiva
         info["export_nota_subida"] = bool(z_exp_hoy >= Z_CHOQUE) and not es_festiva
         info["export_episodio"] = (estado_episodio(cus_exp) if not es_festiva
                                    else {"estado": "suspendido_festivo"})
