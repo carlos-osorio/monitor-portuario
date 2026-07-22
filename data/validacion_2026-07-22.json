@@ -1,0 +1,10 @@
+{
+  "gritos": [],
+  "advertencias": [],
+  "notas": {
+    "snapshot_validado": "portwatch_2026-07-22.csv",
+    "rezago_dias": 5,
+    "revisiones_pct_filas": 37.21,
+    "revisiones_delta_import_ton": 173865
+  }
+}
