@@ -19,37 +19,45 @@ ESTADOS = {
 
 def linea_puerto(nombre, d):
     desv = 100 * (d["import_semana"] - d["baseline"]) / d["baseline"]
-    partes = [f"**{nombre}** — {ESTADOS[d['episodio']['estado']]}",
-              f"Importaciones: {d['import_semana']:,} ton. "
-              f"({desv:+.0f}% vs. patrón de {d['baseline']:,} ton.; z = {d['z']})"]
+    partes = [f"**{nombre}** — {ESTADOS[d['episodio']['estado']]}"]
+
+    # Importaciones en lenguaje llano
+    tendencia = describir_desviacion(desv)
+    partes.append(f"Importaciones: {d['import_semana']:,.0f} ton — {tendencia}")
+
     if "export_semana" in d:
         desv_e = 100 * (d["export_semana"] - d["export_baseline"]) / d["export_baseline"]
-        partes.append(f"Exportaciones: {d['export_semana']:,} ton "
-                      f"({desv_e:+.0f}% vs. patrón de {d['export_baseline']:,} ton"
-                      + (f"; z = {d['export_z']})" if "export_z" in d else ")"))
-        ep_e = d.get("export_episodio", {})
-        if ep_e.get("estado") == "nueva":
-            partes.append("🔴 ALERTA (expo): inicio de episodio")
-        if ep_e.get("estado") == "en_curso":
-            partes.append(f"🟠 Expo bajo su patrón desde {ep_e['inicio']} ({ep_e['semanas']} semanas)")
-        if ep_e.get("estado") == "cierre":
-            partes.append("🔵 Expo normalizó esta semana")
-        if d.get("export_choque_caida"):
-            partes.append("⚠ Caída abrupta en exportaciones esta semana")
-        if d.get("export_alerta_piso"):
-            partes.append("⚠ Exportaciones en mínimo histórico (bajo P1 del puerto)")
+        partes.append(f"Exportaciones: {d['export_semana']:,.0f} ton — "
+                      f"{describir_desviacion(desv_e)}")
+
+    # Señales, ya en lenguaje humano
     ep = d["episodio"]
     if ep["estado"] == "en_curso":
-        partes.append(f"Bajo su patrón desde {ep['inicio']} ({ep['semanas']} semanas)")
+        partes.append(f"Por debajo de lo habitual desde {ep['inicio']} "
+                      f"({ep['semanas']} semanas seguidas)")
     if ep["estado"] == "cierre":
-        partes.append(f"Normalizó esta semana")
+        partes.append("Volvió a niveles normales esta semana")
     if d.get("choque_caida"):
-        partes.append("⚠ Caída abrupta esta semana")
-    if d.get("alerta_piso"):
-        partes.append("⚠ Importaciones en mínimo histórico (bajo P1 del puerto)")
+        partes.append("Caída fuerte y repentina esta semana")
     if d.get("nota_subida"):
-        partes.append("↑ Semana inusualmente alta (nota informativa)")
+        partes.append("Semana inusualmente alta")
+    if d.get("alerta_piso"):
+        partes.append("Importaciones en su nivel más bajo de los últimos años")
+    if d.get("export_alerta_piso"):
+        partes.append("Exportaciones en su nivel más bajo de los últimos años")
+
     return "  \n".join(partes)
+
+
+def describir_desviacion(pct):
+    """Traduce la desviación vs. patrón a lenguaje llano."""
+    a = abs(pct)
+    if a < 5:
+        return "en línea con lo habitual"
+    direccion = "por encima" if pct > 0 else "por debajo"
+    if a < 20:
+        return f"{a:.0f}% {direccion} de lo habitual"
+    return f"{a:.0f}% {direccion} de lo habitual para el puerto"
 
 
 def main():
@@ -76,18 +84,15 @@ def main():
         md += [linea_puerto(puerto, d), ""]
 
     md += ["---",
-           "**Cómo leer este reporte:**",
-           "- El *patrón esperado* es la mediana de las 13 semanas previas de cada puerto.",
-           "- *z* mide la desviación de la semana en unidades robustas (mediana/MAD por puerto).",
-           "- Se alerta por **caídas abruptas** (z ≤ −3) y por **caídas sostenidas** (CUSUM).",
-           "- Las semanas festivas (fin/inicio de año) se reportan sin alertar.",
-           "",
-           "**Limitaciones.** Datos estimados por el IMF a partir de señales AIS; "
-           "sujetos a revisión. Detección con 10–14 días de rezago: este monitor "
-           "es analítico, no operativo. Cobertura: importaciones de Buenaventura, "
-           "Cartagena, Barranquilla y Santa Marta.",
-           "",
-           f"*[Metodología y código](https://github.com/carlos-osorio/monitor-portuario)*"]
+           "**Nota metodológica.** \"Lo habitual\" es el nivel típico "
+           "de cada puerto en las últimas 13 semanas. Una semana se marca como "
+           "inusual cuando se aparta de ese nivel más de lo que el propio puerto "
+           "suele variar (medida robusta de dispersión por puerto; detalle técnico "
+           "y código en el repositorio). Se distinguen caídas abruptas de una "
+           "semana y descensos sostenidos de varias. Las semanas de fin y comienzo "
+           "de año se reportan sin marcar por su estacionalidad.",
+           ""
+           ]
 
     texto = "\n".join(md)
     Path("reports").mkdir(exist_ok=True)
