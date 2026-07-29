@@ -7,7 +7,7 @@ aquí vive el *porqué* de lo no evidente.
 ---
 ## 2026-07-29 — Ajuste diseño de descarga de la API
 
-**Problema:** El API de PortWatch puede devolver respuestas sin 'features' por hipos transitorios (visto en la corrida del 29 jul). La descarga reintenta con backoff exponencial y solo falla tras 3 intentos
+**Problema:** El API de PortWatch puede devolver respuestas sin 'features' por hipos transitorios (visto en la corrida del 29 jul). La descarga reintenta con backoff exponencial y solo falla tras 3 intentos.
 
 **Lección:** Un sistema desatendido debe absorber la inestabilidad de sus fuentes externas
 
