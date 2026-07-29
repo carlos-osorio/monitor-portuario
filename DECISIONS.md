@@ -5,6 +5,14 @@ reciente arriba. Complementa al README (qué es y cómo se opera el sistema);
 aquí vive el *porqué* de lo no evidente.
 
 ---
+## 2026-07-29 — Ajuste diseño de descarga de la API
+
+**Problema:** El API de PortWatch puede devolver respuestas sin 'features' por hipos transitorios (visto en la corrida del 29 jul). La descarga reintenta con backoff exponencial y solo falla tras 3 intentos
+
+**Lección:** Un sistema desatendido debe absorber la inestabilidad de sus fuentes externas
+
+---
+
 ## 2026-07-17 — Regla de piso: red de seguridad contra la ceguera del z
 
 **Problema:** en series de alta dispersión acotadas en cero (Barranquilla-expo,
