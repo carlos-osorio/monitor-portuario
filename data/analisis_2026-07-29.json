@@ -121,10 +121,5 @@
       ]
     }
   },
-  "sombra_error_mape_pct": {
-    "Barranquilla": 105.5,
-    "Buenaventura": 0.6,
-    "Cartagena": 5.2,
-    "Santa Marta": 731.6
-  }
+  "sombra_error_mape_pct": {}
 }
