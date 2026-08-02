@@ -67,7 +67,6 @@ def grafico_tendencia(df):
                  fontsize=13, fontweight="bold", loc="left")
     ax.set_ylabel("miles de toneladas / semana (suavizado)")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
-    ax.legend(fontsize=9, loc="upper right", frameon=False, ncol=1)
     ax.margins(x=0.01)
     fig.savefig(SALIDA / "tendencia_puertos.svg", format="svg")
     plt.close(fig)
