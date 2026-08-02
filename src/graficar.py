@@ -75,30 +75,26 @@ def grafico_barranquilla(df):
     print("✓ barranquilla_calado.svg")
 
 def grafico_pandemia(df):
-    """Gráfico narrativo: el impacto de la pandemia en la actividad portuaria nacional."""
+    """Gráfico narrativo: impacto de la pandemia, un panel por puerto (escalas propias)."""
     puertos = ["Buenaventura", "Cartagena", "Barranquilla", "Santa Marta"]
     colores = {"Buenaventura": "#1a5490", "Cartagena": "#c0392b",
                "Barranquilla": "#27ae60", "Santa Marta": "#e67e22"}
 
-    fig, ax = plt.subplots(figsize=(10, 4.6))
-    for p in puertos:
-        s = serie_semanal(df, p, "import").rolling(4).mean()   # suaviza a media móvil de 4 sem.
-        ax.plot(s.index, s.values / 1000, color=colores[p], linewidth=1.4, label=p)
+    fig, axes = plt.subplots(2, 2, figsize=(10, 6), sharex=True)
+    for ax, p in zip(axes.flat, puertos):
+        s = serie_semanal(df, p, "import").rolling(4).mean()
+        ax.plot(s.index, s.values / 1000, color=colores[p], linewidth=1.3)
+        ax.axvspan(pd.Timestamp("2020-03-15"), pd.Timestamp("2020-06-30"),
+                   color="grey", alpha=0.15)
+        ax.set_title(p, fontsize=10, fontweight="bold", loc="left")
+        ax.set_ylabel("mil ton/sem", fontsize=8)
+        ax.tick_params(labelsize=8)
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 
-    # Sombrea el confinamiento inicial (mar–jun 2020)
-    ax.axvspan(pd.Timestamp("2020-03-15"), pd.Timestamp("2020-06-30"),
-               color="grey", alpha=0.15)
-    ax.annotate("Confinamiento\npor COVID-19",
-                xy=(pd.Timestamp("2020-05-01"), ax.get_ylim()[1] * 0.9),
-                fontsize=8, color="#444", ha="center")
-
-    ax.set_title("Actividad portuaria de Colombia — importaciones semanales por puerto",
-                 fontsize=12, fontweight="bold", loc="left")
-    ax.set_ylabel("miles de toneladas / semana (media móvil 4 sem.)")
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
-    ax.legend(fontsize=8, loc="upper left", frameon=False, ncol=2)
-    ax.margins(x=0.01)
-
+    fig.suptitle("Actividad portuaria de Colombia — importaciones semanales por puerto",
+                 fontsize=12, fontweight="bold", x=0.02, ha="left")
+    fig.text(0.5, 0.005, "Zona gris: confinamiento inicial por COVID-19 (mar–jun 2020)",
+             ha="center", fontsize=8, color="#444")
     fig.savefig(SALIDA / "pandemia_puertos.svg", format="svg")
     plt.close(fig)
     print("✓ pandemia_puertos.svg")
