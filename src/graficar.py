@@ -113,12 +113,12 @@ def graficos_por_puerto(df, flujo="import"):
         ax.plot(s.index, s.values / 1000, color=color, linewidth=1.4)
 
         for ini, fin, etq in hitos:
-        ax.axvspan(ini, fin, color="grey", alpha=0.13)
-        # etiqueta rotada, dentro de la banda gris, en la parte baja
-        medio = ini + (fin - ini) / 2
-        ax.annotate(etq, xy=(medio, ax.get_ylim()[1] * 0.05),
-                    fontsize=7.5, color="#666", ha="center", rotation=90,
-                    va="bottom")
+            ax.axvspan(ini, fin, color="grey", alpha=0.13)
+            # etiqueta rotada, dentro de la banda gris, en la parte baja
+            medio = ini + (fin - ini) / 2
+            ax.annotate(etq, xy=(medio, ax.get_ylim()[1] * 0.05),
+                        fontsize=7.5, color="#666", ha="center", rotation=90,
+                        va="bottom")
 
         ax.legend(fontsize=9, loc="upper right", frameon=False, ncol=1)
 
