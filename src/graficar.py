@@ -42,37 +42,34 @@ def serie_semanal(df, puerto, columna):
     return s
 
 
-def grafico_barranquilla(df):
-    """Gráfico narrativo: episodio del calado en Barranquilla."""
-    col = "export"                              # ← cambia a "export" si ahí se ve mejor
-    s = serie_semanal(df, "Barranquilla", col).loc["2024-01":]
-    movil = s.rolling(13).median()             # "lo habitual" del detector
+def grafico_tendencia(df):
+    """Gráfico central: tendencia de largo plazo de los cuatro puertos, con hitos."""
+    puertos = {"Buenaventura": "#1a5490", "Cartagena": "#c0392b",
+               "Barranquilla": "#27ae60", "Santa Marta": "#e67e22"}
+    hitos = [
+        (pd.Timestamp("2020-03-15"), pd.Timestamp("2020-06-30"), "COVID-19"),
+        (pd.Timestamp("2021-04-28"), pd.Timestamp("2021-06-15"), "Paro nacional"),
+    ]
 
-    fig, ax = plt.subplots(figsize=(10, 4.2))
-    ax.plot(s.index, s.values / 1000, color=AZUL, linewidth=1.5, label="Semanal")
-    ax.plot(movil.index, movil.values / 1000, color=AZUL, linewidth=1.3,
-            linestyle=":", alpha=0.8, label="Mediana móvil (13 sem.)")
+    fig, ax = plt.subplots(figsize=(11, 5))
+    for p, color in puertos.items():
+        s = serie_semanal(df, p, "import").rolling(8).mean()   # suavizado amplio para la forma
+        ax.plot(s.index, s.values / 1000, color=color, linewidth=1.5, label=p)
 
-    ax.axvspan(pd.Timestamp("2025-10-01"), pd.Timestamp("2026-03-25"),
-               color=ROJO, alpha=0.10)
-    # Anotación debajo de la línea, fuente menor
-    ymin = s.loc["2025-10":"2026-03"].min() / 1000
-    ax.annotate("Crisis del calado del canal",
-                xy=(pd.Timestamp("2025-12-15"), ymin),
-                xytext=(pd.Timestamp("2025-12-15"), ymin * 0.6),
-                fontsize=8, color=ROJO, ha="center",
-                arrowprops=dict(arrowstyle="-", color=ROJO, alpha=0.5))
+    for ini, fin, etq in hitos:
+        ax.axvspan(ini, fin, color="grey", alpha=0.13)
+        ax.annotate(etq, xy=(ini, ax.get_ylim()[1] * 0.96),
+                    fontsize=8, color="#555", ha="left")
 
-    ax.set_title(f"Barranquilla — {'importaciones' if col=='import' else 'exportaciones'} semanales",
-                 fontsize=12, fontweight="bold", loc="left")
-    ax.set_ylabel("miles de toneladas / semana")
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
-    ax.legend(fontsize=8, loc="upper right", frameon=False)
+    ax.set_title("Actividad portuaria de Colombia — importaciones 2019-2026",
+                 fontsize=13, fontweight="bold", loc="left")
+    ax.set_ylabel("miles de toneladas / semana (suavizado)")
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+    ax.legend(fontsize=9, loc="upper left", frameon=False, ncol=2)
     ax.margins(x=0.01)
-
-    fig.savefig(SALIDA / "barranquilla_calado.svg", format="svg")
+    fig.savefig(SALIDA / "tendencia_puertos.svg", format="svg")
     plt.close(fig)
-    print("✓ barranquilla_calado.svg")
+    print("✓ tendencia_puertos.svg")
 
 def grafico_pandemia(df):
     """Gráfico narrativo: impacto de la pandemia, un panel por puerto (escalas propias)."""
@@ -135,6 +132,7 @@ def graficos_por_puerto(df, flujo="import"):
 
 def main():
     df = cargar_snapshot()
+    grafico_tendencia(df)
     graficos_por_puerto(df, "import")
     graficos_por_puerto(df, "export")
     print("Gráficos generados en", SALIDA)
