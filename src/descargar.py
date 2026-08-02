@@ -17,7 +17,9 @@ PUERTOS_V1 = {
     "port1154": "Santa Marta",
 }
 
-CAMPOS = "date,portid,portname,portcalls,portcalls_container,import,export"
+CAMPOS = ("date,portid,portname,portcalls,portcalls_container,import,export,"
+          "import_dry_bulk,import_container,import_general_cargo,import_tanker,import_roro,"
+          "export_dry_bulk,export_container,export_general_cargo,export_tanker,export_roro")
 INICIO_SERIE = "2019-01-07"   # antes de esta fecha la serie está muerta (verificado en exploración)
 
 import time
