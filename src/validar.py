@@ -14,7 +14,11 @@ import pandas as pd
 
 # ── POLÍTICA (editar aquí, no abajo) ─────────────────────────────
 COLUMNAS_ESPERADAS = {"date", "portid", "portname", "portcalls",
-                      "portcalls_container", "import", "export"}
+                      "portcalls_container", "import", "export",
+                      "import_dry_bulk", "import_container", "import_general_cargo",
+                      "import_tanker", "import_roro",
+                      "export_dry_bulk", "export_container", "export_general_cargo",
+                      "export_tanker", "export_roro"}
 PUERTOS_ESPERADOS = {"Buenaventura", "Cartagena", "Barranquilla", "Santa Marta"}
 INICIO_SERIE = "2019-01-07"
 REZAGO_ADVIERTE_DIAS = 16          # un ciclo de publicación perdido
@@ -24,7 +28,11 @@ TOPES_DIARIOS = {                  # umbral superior de plausibilidad (criterio 
     "import": 370_000,             # TODO Carlos: OK
     "export": 320_000,             # TODO Carlos: OK
 }
-NUMERICAS = ["portcalls", "portcalls_container", "import", "export"]
+NUMERICAS = ["portcalls", "portcalls_container", "import", "export",
+             "import_dry_bulk", "import_container", "import_general_cargo",
+             "import_tanker", "import_roro",
+             "export_dry_bulk", "export_container", "export_general_cargo",
+             "export_tanker", "export_roro"]
 
 gritos, advertencias, notas = [], [], {}
 
