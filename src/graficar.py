@@ -43,7 +43,7 @@ def serie_semanal(df, puerto, columna):
 
 
 def grafico_tendencia(df):
-    """Gráfico central: tendencia de largo plazo de los cuatro puertos, con hitos."""
+    """Gráfico estrella: tendencia de largo plazo de los cuatro puertos, con hitos."""
     puertos = {"Buenaventura": "#1a5490", "Cartagena": "#c0392b",
                "Barranquilla": "#27ae60", "Santa Marta": "#e67e22"}
     hitos = [
@@ -53,19 +53,21 @@ def grafico_tendencia(df):
 
     fig, ax = plt.subplots(figsize=(11, 5))
     for p, color in puertos.items():
-        s = serie_semanal(df, p, "import").rolling(8).mean()   # suavizado amplio para la forma
+        s = serie_semanal(df, p, "import").rolling(8).mean()
         ax.plot(s.index, s.values / 1000, color=color, linewidth=1.5, label=p)
 
     for ini, fin, etq in hitos:
         ax.axvspan(ini, fin, color="grey", alpha=0.13)
-        ax.annotate(etq, xy=(ini, ax.get_ylim()[1] * 0.96),
-                    fontsize=8, color="#555", ha="left")
+        medio = ini + (fin - ini) / 2
+        ax.annotate(etq, xy=(medio, ax.get_ylim()[1] * 0.05),
+                    fontsize=7.5, color="#666", ha="center",
+                    rotation=90, va="bottom")
 
     ax.set_title("Actividad portuaria de Colombia — importaciones 2019-2026",
                  fontsize=13, fontweight="bold", loc="left")
     ax.set_ylabel("miles de toneladas / semana (suavizado)")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
-    ax.legend(fontsize=9, loc="upper left", frameon=False, ncol=2)
+    ax.legend(fontsize=9, loc="upper right", frameon=False, ncol=1)
     ax.margins(x=0.01)
     fig.savefig(SALIDA / "tendencia_puertos.svg", format="svg")
     plt.close(fig)
