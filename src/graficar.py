@@ -120,7 +120,7 @@ def graficos_por_puerto(df, flujo="import"):
                     fontsize=7.5, color="#666", ha="center", rotation=90,
                     va="bottom")
 
-    ax.legend(fontsize=9, loc="upper right", frameon=False, ncol=1)
+        ax.legend(fontsize=9, loc="upper right", frameon=False, ncol=1)
 
         ax.set_title(f"{puerto} — {etiqueta_flujo} semanales (suavizado 4 sem.)",
                      fontsize=11, fontweight="bold", loc="left")
