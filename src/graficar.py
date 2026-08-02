@@ -44,7 +44,7 @@ def serie_semanal(df, puerto, columna):
 
 def grafico_barranquilla(df):
     """Gráfico narrativo: episodio del calado en Barranquilla."""
-    col = "import"                              # ← cambia a "export" si ahí se ve mejor
+    col = "export"                              # ← cambia a "export" si ahí se ve mejor
     s = serie_semanal(df, "Barranquilla", col).loc["2024-01":]
     movil = s.rolling(13).median()             # "lo habitual" del detector
 
