@@ -113,9 +113,14 @@ def graficos_por_puerto(df, flujo="import"):
         ax.plot(s.index, s.values / 1000, color=color, linewidth=1.4)
 
         for ini, fin, etq in hitos:
-            ax.axvspan(ini, fin, color="grey", alpha=0.15)
-            ax.annotate(etq, xy=(ini, ax.get_ylim()[1] * 0.92),
-                        fontsize=7.5, color="#555", ha="left")
+        ax.axvspan(ini, fin, color="grey", alpha=0.13)
+        # etiqueta rotada, dentro de la banda gris, en la parte baja
+        medio = ini + (fin - ini) / 2
+        ax.annotate(etq, xy=(medio, ax.get_ylim()[1] * 0.05),
+                    fontsize=7.5, color="#666", ha="center", rotation=90,
+                    va="bottom")
+
+    ax.legend(fontsize=9, loc="upper right", frameon=False, ncol=1)
 
         ax.set_title(f"{puerto} — {etiqueta_flujo} semanales (suavizado 4 sem.)",
                      fontsize=11, fontweight="bold", loc="left")
