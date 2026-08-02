@@ -74,6 +74,35 @@ def grafico_barranquilla(df):
     plt.close(fig)
     print("✓ barranquilla_calado.svg")
 
+def grafico_pandemia(df):
+    """Gráfico narrativo: el impacto de la pandemia en la actividad portuaria nacional."""
+    puertos = ["Buenaventura", "Cartagena", "Barranquilla", "Santa Marta"]
+    colores = {"Buenaventura": "#1a5490", "Cartagena": "#c0392b",
+               "Barranquilla": "#27ae60", "Santa Marta": "#e67e22"}
+
+    fig, ax = plt.subplots(figsize=(10, 4.6))
+    for p in puertos:
+        s = serie_semanal(df, p, "import").rolling(4).mean()   # suaviza a media móvil de 4 sem.
+        ax.plot(s.index, s.values / 1000, color=colores[p], linewidth=1.4, label=p)
+
+    # Sombrea el confinamiento inicial (mar–jun 2020)
+    ax.axvspan(pd.Timestamp("2020-03-15"), pd.Timestamp("2020-06-30"),
+               color="grey", alpha=0.15)
+    ax.annotate("Confinamiento\npor COVID-19",
+                xy=(pd.Timestamp("2020-05-01"), ax.get_ylim()[1] * 0.9),
+                fontsize=8, color="#444", ha="center")
+
+    ax.set_title("Actividad portuaria de Colombia — importaciones semanales por puerto",
+                 fontsize=12, fontweight="bold", loc="left")
+    ax.set_ylabel("miles de toneladas / semana (media móvil 4 sem.)")
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+    ax.legend(fontsize=8, loc="upper left", frameon=False, ncol=2)
+    ax.margins(x=0.01)
+
+    fig.savefig(SALIDA / "pandemia_puertos.svg", format="svg")
+    plt.close(fig)
+    print("✓ pandemia_puertos.svg")
+
 
 def main():
     df = cargar_snapshot()
