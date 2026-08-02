@@ -99,44 +99,45 @@ def grafico_pandemia(df):
     plt.close(fig)
     print("✓ pandemia_puertos.svg")
 
-def graficos_por_puerto(df):
-    """Un gráfico ancho por puerto: serie de importaciones 2019-2026, con hitos marcados."""
+def graficos_por_puerto(df, flujo="import"):
+    """Un gráfico ancho por puerto, para el flujo indicado (import o export)."""
     puertos = {"Buenaventura": "#1a5490", "Cartagena": "#c0392b",
                "Barranquilla": "#27ae60", "Santa Marta": "#e67e22"}
+    etiqueta_flujo = "importaciones" if flujo == "import" else "exportaciones"
 
-    # Hitos históricos verificables (contexto, no anomalías detectadas → gris)
     hitos = [
         (pd.Timestamp("2020-03-15"), pd.Timestamp("2020-06-30"), "Confinamiento COVID-19"),
         (pd.Timestamp("2021-04-28"), pd.Timestamp("2021-06-15"), "Paro nacional"),
     ]
 
     for puerto, color in puertos.items():
-        s = serie_semanal(df, puerto, "import").rolling(4).mean()
+        s = serie_semanal(df, puerto, flujo).rolling(4).mean()
         fig, ax = plt.subplots(figsize=(11, 3.6))
         ax.plot(s.index, s.values / 1000, color=color, linewidth=1.4)
 
-        for ini, fin, etiqueta in hitos:
+        for ini, fin, etq in hitos:
             ax.axvspan(ini, fin, color="grey", alpha=0.15)
-            ax.annotate(etiqueta, xy=(ini, ax.get_ylim()[1] * 0.92),
+            ax.annotate(etq, xy=(ini, ax.get_ylim()[1] * 0.92),
                         fontsize=7.5, color="#555", ha="left")
 
-        ax.set_title(f"{puerto} — importaciones semanales (media móvil 4 sem.)",
+        ax.set_title(f"{puerto} — {etiqueta_flujo} semanales (suavizado 4 sem.)",
                      fontsize=11, fontweight="bold", loc="left")
         ax.set_ylabel("mil ton/sem", fontsize=9)
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
         ax.margins(x=0.01)
 
         slug = puerto.lower().replace(" ", "")
-        fig.savefig(SALIDA / f"puerto_{slug}.svg", format="svg")
+        fig.savefig(SALIDA / f"puerto_{slug}_{flujo}.svg", format="svg")
         plt.close(fig)
-        print(f"✓ puerto_{slug}.svg")
+        print(f"✓ puerto_{slug}_{flujo}.svg")
+       
 
 
 def main():
     df = cargar_snapshot()
-    graficos_por_puerto(df)
+    graficos_por_puerto(df, "import")
+    graficos_por_puerto(df, "export")
     print("Gráficos generados en", SALIDA)
-
 
 if __name__ == "__main__":
     main()
