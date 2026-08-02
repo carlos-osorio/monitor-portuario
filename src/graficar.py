@@ -106,7 +106,7 @@ def grafico_pandemia(df):
 
 def main():
     df = cargar_snapshot()
-    grafico_barranquilla(df)
+    grafico_pandemia(df)
     print("Gráficos generados en", SALIDA)
 
 
