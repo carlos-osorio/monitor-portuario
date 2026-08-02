@@ -5,6 +5,25 @@ reciente arriba. Complementa al README (qué es y cómo se opera el sistema);
 aquí vive el *porqué* de lo no evidente.
 
 ---
+
+## 2026-08-02 — Enriquecimiento de CAMPOS: desglose por tipo de carga
+
+CAMPOS ahora captura el desglose import/export por tipo de buque
+(dry_bulk, container, general_cargo, tanker, roro), no solo los totales.
+Sincronizado en las tres listas: CAMPOS (descargar.py), COLUMNAS_ESPERADAS
+y NUMERICAS (validar.py).
+
+Motivo: el ejercicio del dashboard mostró que las anomalías son ilegibles en
+el total y nítidas en el desglose (Santa Marta 2019 = carbón; Cartagena 2025
+= refinados/Reficar). El desglose es esencial para EXPLICAR, no para detectar.
+
+Alcance: la detección (analizar.py) sigue sobre los totales — más estables,
+evita multiplicar series y falsas alarmas. El desglose alimenta el dashboard.
+
+Histórico: los snapshots previos al cambio no tienen el desglose. Pendiente:
+recarga histórica única desde el API para composición completa.
+
+---
 ## 2026-07-29 — Ajuste diseño de descarga de la API
 
 **Problema:** El API de PortWatch puede devolver respuestas sin 'features' por hipos transitorios (visto en la corrida del 29 jul). La descarga reintenta con backoff exponencial y solo falla tras 3 intentos.
