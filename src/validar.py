@@ -114,7 +114,10 @@ def chequeo_revisiones(actual, anterior):                  # 7 → ANOTA
     a = actual[actual["date"] <= corte].set_index(llaves).sort_index()
     b = anterior.set_index(llaves).sort_index()
     comunes = a.index.intersection(b.index)
-    cambiadas = (a.loc[comunes, NUMERICAS] != b.loc[comunes, NUMERICAS]).any(axis=1)
+    # Comparar solo columnas presentes en AMBOS snapshots: los previos al
+    # enriquecimiento de CAMPOS no tienen el desglose por tipo de carga.
+    cols = [c for c in NUMERICAS if c in a.columns and c in b.columns]
+    cambiadas = (a.loc[comunes, cols] != b.loc[comunes, cols]).any(axis=1)
     notas["revisiones_pct_filas"] = round(100 * cambiadas.mean(), 2)
     notas["revisiones_delta_import_ton"] = int(
         (a.loc[comunes, "import"] - b.loc[comunes, "import"]).abs().sum())
