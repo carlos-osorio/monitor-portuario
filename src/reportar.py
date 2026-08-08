@@ -100,6 +100,36 @@ def main():
     (Path("reports") / "ultimo.md").write_text(texto, encoding="utf-8")
     print(f"Reporte escrito: reports/{hoy}.md y reports/ultimo.md")
 
+    # Versión web: index.html en la raíz, para GitHub Pages
+    try:
+        import markdown
+        cuerpo = markdown.markdown(texto, extensions=["tables"])
+    except ImportError:
+        cuerpo = f"<pre>{texto}</pre>"
+
+    html = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor portuario — Colombia</title>
+<style>
+  body {{ max-width: 820px; margin: 2rem auto; padding: 0 1rem;
+          font-family: system-ui, -apple-system, sans-serif; line-height: 1.55; color: #222; }}
+  h1 {{ font-size: 1.5rem; }}
+  strong {{ font-weight: 600; }}
+  hr {{ border: none; border-top: 1px solid #ddd; margin: 1.5rem 0; }}
+  blockquote {{ border-left: 3px solid #e67e22; margin: 1rem 0; padding: 0.3rem 0 0.3rem 1rem;
+                color: #663; background: #fdf6ec; }}
+  em {{ color: #666; }}
+</style>
+</head>
+<body>
+{cuerpo}
+</body>
+</html>"""
+    Path("index.html").write_text(html, encoding="utf-8")
+
 
 if __name__ == "__main__":
     main()
