@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 
 # ── PARÁMETROS (calibrados en notebooks/02, jul 2026) ────────────
+GRACIA_SEMANAS = 2
 K_VENTANA = 13
 Z_CHOQUE = 3.0
 CUSUM_K = 0.5
@@ -87,19 +88,34 @@ def main():
         s = sem[puerto]
         z = z_modificado(s)
         cus = cusum_negativo(z)
-        z_hoy = float(z.iloc[-1])
+
+        # ── Doble mirada: preliminar (última sem, edad 1) + firme (penúltima, edad 2) ──
+        # El detector es el mismo; solo leemos dos posiciones de la serie.
+        z_prelim = float(z.iloc[-1])
+        z_firme = float(z.iloc[-2]) if len(z) >= 2 else float("nan")
+        ep_prelim = estado_episodio(cus)
+        ep_firme = estado_episodio(cus.iloc[:-1]) if len(cus) >= 2 else {"estado": "normal"}
 
         info = {
             "import_semana": int(s.iloc[-1]),
             "baseline": int(s.rolling(K_VENTANA).median().shift(1).iloc[-1]),
-            "z": round(z_hoy, 2),
-            "choque_caida": bool(z_hoy <= -Z_CHOQUE) and not es_festiva,
-            "alerta_piso":  bajo_piso(s) and not es_festiva,
-            "nota_subida": bool(z_hoy >= Z_CHOQUE) and not es_festiva,
             "cusum": round(float(cus.iloc[-1]), 2),
-            "episodio": estado_episodio(cus),
+            "preliminar": {
+                "semana": str(s.index[-1].date()),
+                "z": round(z_prelim, 2),
+                "choque_caida": bool(z_prelim <= -Z_CHOQUE) and not es_festiva,
+                "episodio": ep_prelim,
+            },
+            "firme": {
+                "semana": str(s.index[-2].date()) if len(s) >= 2 else None,
+                "z": round(z_firme, 2) if len(s) >= 2 else None,
+                "choque_caida": bool(z_firme <= -Z_CHOQUE) and not es_festiva if len(s) >= 2 else False,
+                "episodio": ep_firme,
+            },
+            # Señales secundarias (sin doble mirada por ahora — acordado acotar)
+            "alerta_piso": bajo_piso(s) and not es_festiva,
+            "nota_subida": bool(z_prelim >= Z_CHOQUE) and not es_festiva,
         }
-
 
         s_exp = (df[df["portname"] == puerto].set_index("date")["export"]
                  .resample("W").sum().iloc[:-1])
@@ -114,9 +130,10 @@ def main():
         info["export_nota_subida"] = bool(z_exp_hoy >= Z_CHOQUE) and not es_festiva
         info["export_episodio"] = (estado_episodio(cus_exp) if not es_festiva
                                    else {"estado": "suspendido_festivo"})
-      
+
         if es_festiva:
-            info["episodio"] = {"estado": "suspendido_festivo"}
+            info["preliminar"]["episodio"] = {"estado": "suspendido_festivo"}
+            info["firme"]["episodio"] = {"estado": "suspendido_festivo"}
         resultado["puertos"][puerto] = info
 
     # ── Pronóstico sombra: persiste el baseline, y evalúa el de la corrida pasada
@@ -147,8 +164,9 @@ def main():
 
     print(f"Análisis escrito en {salida}")
     for p, info in resultado["puertos"].items():
-        print(f"  {p:<14} z={info['z']:>6}  cusum={info['cusum']:>6}  "
-              f"episodio={info['episodio']['estado']}")
+        pre, fir = info["preliminar"], info["firme"]
+        print(f"  {p:<14} firme: z={str(fir['z']):>6} ep={fir['episodio']['estado']:<8} "
+              f"| prelim: z={pre['z']:>6} ep={pre['episodio']['estado']}")
 
 
 if __name__ == "__main__":
