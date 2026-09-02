@@ -1,0 +1,132 @@
+{
+  "semana_analizada": "2026-08-23",
+  "excepcion_festiva": false,
+  "puertos": {
+    "Barranquilla": {
+      "import_semana": 163997,
+      "baseline": 111273,
+      "z": 1.01,
+      "choque_caida": false,
+      "alerta_piso": false,
+      "nota_subida": false,
+      "cusum": 0.0,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 22340,
+      "export_baseline": 47929,
+      "export_z": -0.57,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Buenaventura": {
+      "import_semana": 191400,
+      "baseline": 256598,
+      "z": -1.23,
+      "choque_caida": false,
+      "alerta_piso": false,
+      "nota_subida": false,
+      "cusum": -0.73,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 21235,
+      "export_baseline": 23836,
+      "export_z": -0.13,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Cartagena": {
+      "import_semana": 199117,
+      "baseline": 314215,
+      "z": -2.63,
+      "choque_caida": false,
+      "alerta_piso": false,
+      "nota_subida": false,
+      "cusum": -6.98,
+      "episodio": {
+        "estado": "nueva",
+        "inicio": "2026-08-23",
+        "semanas": 1
+      },
+      "export_semana": 221768,
+      "export_baseline": 350512,
+      "export_z": -1.0,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Santa Marta": {
+      "import_semana": 71191,
+      "baseline": 71084,
+      "z": 0.0,
+      "choque_caida": false,
+      "alerta_piso": false,
+      "nota_subida": false,
+      "cusum": 0.0,
+      "episodio": {
+        "estado": "normal"
+      },
+      "export_semana": 15177,
+      "export_baseline": 19958,
+      "export_z": -0.23,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    }
+  },
+  "sombra": {
+    "Barranquilla": {
+      "pronostico": [
+        138834,
+        138834,
+        138834,
+        138834
+      ]
+    },
+    "Buenaventura": {
+      "pronostico": [
+        256598,
+        256598,
+        256598,
+        256598
+      ]
+    },
+    "Cartagena": {
+      "pronostico": [
+        311912,
+        311912,
+        311912,
+        311912
+      ]
+    },
+    "Santa Marta": {
+      "pronostico": [
+        71191,
+        71191,
+        71191,
+        71191
+      ]
+    }
+  },
+  "sombra_error_mape_pct": {
+    "Barranquilla": 30.6,
+    "Buenaventura": 30.9,
+    "Cartagena": 57.8,
+    "Santa Marta": 0.2
+  }
+}
