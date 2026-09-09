@@ -16,31 +16,51 @@ ESTADOS = {
     "suspendido_festivo": "⚪ Semana festiva (sin alertas)",
 }
 
+# Cómo se describe una señal preliminar según su estado de episodio
+PRELIM_TEXTO = {
+    "nueva": "posible inicio de caída esta semana",
+    "en_curso": "posible caída sostenida esta semana",
+    "cierre": "posible normalización esta semana",
+}
+
 
 def linea_puerto(nombre, d):
+    firme = d["firme"]
+    prelim = d["preliminar"]
+
+    # ── Estado principal: la mirada FIRME (semana consolidada) ──
+    estado_firme = firme["episodio"]["estado"]
+    partes = [f"**{nombre}** — {ESTADOS[estado_firme]}"]
+
+    # Importaciones y exportaciones (nivel actual, lenguaje llano)
     desv = 100 * (d["import_semana"] - d["baseline"]) / d["baseline"]
-    partes = [f"**{nombre}** — {ESTADOS[d['episodio']['estado']]}"]
-
-    # Importaciones en lenguaje llano
-    tendencia = describir_desviacion(desv)
-    partes.append(f"Importaciones: {d['import_semana']:,.0f} ton — {tendencia}")
-
+    partes.append(f"Importaciones: {d['import_semana']:,.0f} ton — {describir_desviacion(desv)}")
     if "export_semana" in d:
         desv_e = 100 * (d["export_semana"] - d["export_baseline"]) / d["export_baseline"]
         partes.append(f"Exportaciones: {d['export_semana']:,.0f} ton — "
                       f"{describir_desviacion(desv_e)}")
 
-    # Señales, ya en lenguaje humano
-    ep = d["episodio"]
-    if ep["estado"] == "en_curso":
+    # Señales de la mirada firme (episodio confirmado sobre dato consolidado)
+    ep = firme["episodio"]
+    if estado_firme == "en_curso":
         partes.append(f"Por debajo de lo habitual desde {ep['inicio']} "
                       f"({ep['semanas']} semanas seguidas)")
-    if ep["estado"] == "cierre":
-        partes.append("Volvió a niveles normales esta semana")
-    if d.get("choque_caida"):
-        partes.append("Caída fuerte y repentina esta semana")
-    if d.get("nota_subida"):
-        partes.append("Semana inusualmente alta")
+    if estado_firme == "cierre":
+        partes.append("Volvió a niveles normales (confirmado)")
+    if firme.get("choque_caida"):
+        partes.append("Caída fuerte y repentina (confirmada)")
+
+    # ── Aviso preliminar: solo si la mirada reciente detecta algo que la firme no ──
+    estado_prelim = prelim["episodio"]["estado"]
+    hay_prelim_nueva = (estado_prelim in PRELIM_TEXTO and estado_prelim != estado_firme)
+    if hay_prelim_nueva:
+        partes.append(f"⚠️ *Señal preliminar: {PRELIM_TEXTO[estado_prelim]} "
+                      f"(dato reciente, sujeto a revisión — a confirmar la próxima semana).*")
+    elif prelim.get("choque_caida") and not firme.get("choque_caida"):
+        partes.append("⚠️ *Señal preliminar: caída fuerte esta semana "
+                      "(dato reciente, sujeto a revisión).*")
+
+    # Señales secundarias (sin doble mirada, se mantienen)
     if d.get("alerta_piso"):
         partes.append("Importaciones en su nivel más bajo de los últimos años")
     if d.get("export_alerta_piso"):
@@ -58,7 +78,6 @@ def describir_desviacion(pct):
     if a < 20:
         return f"{a:.0f}% {direccion} de lo habitual"
     return f"{a:.0f}% {direccion} de lo habitual para el puerto"
-
 
 def main():
     analisis = sorted(Path("data").glob("analisis_*.json"))[-1]
