@@ -1,0 +1,175 @@
+{
+  "semana_analizada": "2026-09-13",
+  "excepcion_festiva": false,
+  "puertos": {
+    "Barranquilla": {
+      "import_semana": 169022,
+      "baseline": 178553,
+      "cusum": 0.0,
+      "preliminar": {
+        "semana": "2026-09-13",
+        "z": -0.22,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-09-06",
+        "z": 0.99,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 20960,
+      "export_baseline": 58064,
+      "export_z": -0.67,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Buenaventura": {
+      "import_semana": 215166,
+      "baseline": 256564,
+      "cusum": -0.63,
+      "preliminar": {
+        "semana": "2026-09-13",
+        "z": -0.47,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-09-06",
+        "z": -1.03,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 17718,
+      "export_baseline": 18285,
+      "export_z": -0.04,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Cartagena": {
+      "import_semana": 378225,
+      "baseline": 311802,
+      "cusum": -2.58,
+      "preliminar": {
+        "semana": "2026-09-13",
+        "z": 1.44,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-09-06",
+        "z": 1.51,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "cierre",
+          "cerrado_en": "2026-09-06"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 303178,
+      "export_baseline": 304719,
+      "export_z": -0.01,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Santa Marta": {
+      "import_semana": 96531,
+      "baseline": 71191,
+      "cusum": 0.0,
+      "preliminar": {
+        "semana": "2026-09-13",
+        "z": 0.5,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-09-06",
+        "z": -0.68,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 20675,
+      "export_baseline": 19977,
+      "export_z": 0.03,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    }
+  },
+  "sombra": {
+    "Barranquilla": {
+      "pronostico": [
+        178553,
+        178553,
+        178553,
+        178553
+      ]
+    },
+    "Buenaventura": {
+      "pronostico": [
+        256564,
+        256564,
+        256564,
+        256564
+      ]
+    },
+    "Cartagena": {
+      "pronostico": [
+        314118,
+        314118,
+        314118,
+        314118
+      ]
+    },
+    "Santa Marta": {
+      "pronostico": [
+        80548,
+        80548,
+        80548,
+        80548
+      ]
+    }
+  },
+  "sombra_error_mape_pct": {
+    "Barranquilla": 5.6,
+    "Buenaventura": 16.4,
+    "Cartagena": 17.5,
+    "Santa Marta": 26.3
+  }
+}
