@@ -56,7 +56,7 @@ def descargar_puerto(pid: str, reintentos: int = 3) -> pd.DataFrame:
                 continue
 
             # El API respondió, pero ¿trae datos o un error empaquetado?
-             if "features" in cuerpo:
+            if "features" in cuerpo:
                 if cuerpo["features"] or offset > 0:
                     datos = cuerpo["features"]
                     break
@@ -97,7 +97,6 @@ def descargar_puerto(pid: str, reintentos: int = 3) -> pd.DataFrame:
         offset += 1000
 
     return pd.DataFrame(todas)
-
 
 def main() -> None:
     frames = []
