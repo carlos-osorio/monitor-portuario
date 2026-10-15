@@ -56,9 +56,19 @@ def descargar_puerto(pid: str, reintentos: int = 3) -> pd.DataFrame:
                 continue
 
             # El API respondió, pero ¿trae datos o un error empaquetado?
-            if "features" in cuerpo:
-                datos = cuerpo["features"]
-                break
+             if "features" in cuerpo:
+                if cuerpo["features"] or offset > 0:
+                    datos = cuerpo["features"]
+                    break
+                # Primera página vacía: un puerto con historia no puede traer 0 filas.
+                espera = 60 * (intento + 1)   # 60s, 120s, 180s
+                print(f"  {pid}: primera página vacía (intento {intento+1}); "
+                      f"status={r.status_code}; reintento en {espera}s")
+                print("    cabeceras:", {k: v for k, v in r.headers.items()
+                      if k.lower() in ("etag", "x-cache", "cache-control", "via", "server", "age")})
+                print("    cuerpo:", r.text[:300])
+                time.sleep(espera)
+                continue
             if "error" in cuerpo:
                 espera = 2 ** (intento + 1)
                 print(f"  {pid} offset {offset}: el API devolvió error "
