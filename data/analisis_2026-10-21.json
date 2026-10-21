@@ -1,0 +1,181 @@
+{
+  "semana_analizada": "2026-10-11",
+  "excepcion_festiva": false,
+  "puertos": {
+    "Barranquilla": {
+      "import_semana": 223291,
+      "baseline": 145928,
+      "cusum": -3.98,
+      "preliminar": {
+        "semana": "2026-10-11",
+        "z": 1.05,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "cierre",
+          "cerrado_en": "2026-10-11"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-04",
+        "z": -2.54,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "nueva",
+          "inicio": "2026-10-04",
+          "semanas": 1
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 23856,
+      "export_baseline": 61177,
+      "export_z": -0.74,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Buenaventura": {
+      "import_semana": 201671,
+      "baseline": 239567,
+      "cusum": -5.31,
+      "preliminar": {
+        "semana": "2026-10-11",
+        "z": -0.75,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "en_curso",
+          "inicio": "2026-10-04",
+          "semanas": 2
+        }
+      },
+      "firme": {
+        "semana": "2026-10-04",
+        "z": -2.34,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "nueva",
+          "inicio": "2026-10-04",
+          "semanas": 1
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 91570,
+      "export_baseline": 16859,
+      "export_z": 8.02,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": true,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Cartagena": {
+      "import_semana": 174623,
+      "baseline": 309365,
+      "cusum": -4.65,
+      "preliminar": {
+        "semana": "2026-10-11",
+        "z": -2.54,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-04",
+        "z": 0.89,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": true,
+      "nota_subida": false,
+      "export_semana": 229376,
+      "export_baseline": 263147,
+      "export_z": -0.55,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Santa Marta": {
+      "import_semana": 33271,
+      "baseline": 71191,
+      "cusum": -0.29,
+      "preliminar": {
+        "semana": "2026-10-11",
+        "z": -0.72,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-04",
+        "z": -0.58,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 104069,
+      "export_baseline": 15177,
+      "export_z": 6.49,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": true,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    }
+  },
+  "sombra": {
+    "Barranquilla": {
+      "pronostico": [
+        168105,
+        168105,
+        168105,
+        168105
+      ]
+    },
+    "Buenaventura": {
+      "pronostico": [
+        224414,
+        224414,
+        224414,
+        224414
+      ]
+    },
+    "Cartagena": {
+      "pronostico": [
+        302680,
+        302680,
+        302680,
+        302680
+      ]
+    },
+    "Santa Marta": {
+      "pronostico": [
+        59425,
+        59425,
+        59425,
+        59425
+      ]
+    }
+  },
+  "sombra_error_mape_pct": {
+    "Barranquilla": 34.6,
+    "Buenaventura": 18.3,
+    "Cartagena": 77.2,
+    "Santa Marta": 114.0
+  }
+}
