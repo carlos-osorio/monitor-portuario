@@ -2,8 +2,10 @@ name: Descarga semanal PortWatch
 
 on:
   schedule:
-    - cron: "0 10 * * 3"      # miércoles 10:00 UTC = 5:00 am Bogotá
-  workflow_dispatch:           # botón para dispararlo a mano
+    - cron: "0 10 * * 3"      # miércoles 10:00 UTC = 5:00 am Bogotá (corrida principal)
+    - cron: "0 10 * * 4"      # jueves: reintento si el miércoles falló
+    - cron: "0 10 * * 5"      # viernes: segundo reintento
+  workflow_dispatch:           # botón para dispararlo a mano (siempre corre)
 
 permissions:
   contents: write              # permiso para guardar el snapshot en el repo
@@ -15,27 +17,48 @@ jobs:
       - name: Clonar el repositorio
         uses: actions/checkout@v4
 
+      # Los reintentos del jueves y viernes solo corren si esta semana no hay snapshot.
+      # Así una corrida exitosa del miércoles no se duplica y la medición de
+      # revisiones sigue comparando snapshots separados una semana.
+      - name: Revisar si ya hay snapshot esta semana
+        id: guard
+        run: |
+          ultimo=$(ls data/portwatch_*.csv | sort | tail -1 | sed 's/.*portwatch_\(.*\)\.csv/\1/')
+          limite=$(TZ=America/Bogota date -d '3 days ago' +%F)
+          echo "Último snapshot: $ultimo (límite: $limite)"
+          if [[ "${{ github.event_name }}" == "schedule" && "$ultimo" > "$limite" ]]; then
+            echo "Ya hay snapshot reciente: no se repite la corrida."
+            echo "saltar=1" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Instalar Python
+        if: steps.guard.outputs.saltar != '1'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Instalar dependencias
+        if: steps.guard.outputs.saltar != '1'
         run: pip install -r requirements.txt
 
       - name: Ejecutar descarga
+        if: steps.guard.outputs.saltar != '1'
         run: python src/descargar.py
-        
+
       - name: Validar snapshot
+        if: steps.guard.outputs.saltar != '1'
         run: python src/validar.py
-        
+
       - name: Analizar
+        if: steps.guard.outputs.saltar != '1'
         run: python src/analizar.py
 
       - name: Reportar
+        if: steps.guard.outputs.saltar != '1'
         run: python src/reportar.py
-        
+
       - name: Guardar snapshot en el repo
+        if: steps.guard.outputs.saltar != '1'
         run: |
           git config user.name "monitor-bot"
           git config user.email "actions@github.com"
