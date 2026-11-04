@@ -1,0 +1,179 @@
+{
+  "semana_analizada": "2026-10-25",
+  "excepcion_festiva": false,
+  "puertos": {
+    "Barranquilla": {
+      "import_semana": 119349,
+      "baseline": 168105,
+      "cusum": -4.22,
+      "preliminar": {
+        "semana": "2026-10-25",
+        "z": -0.84,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-18",
+        "z": -0.81,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 47901,
+      "export_baseline": 58064,
+      "export_z": -0.21,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Buenaventura": {
+      "import_semana": 209831,
+      "baseline": 224540,
+      "cusum": -4.32,
+      "preliminar": {
+        "semana": "2026-10-25",
+        "z": -0.22,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-18",
+        "z": 0.4,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "cierre",
+          "cerrado_en": "2026-10-18"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 21284,
+      "export_baseline": 19095,
+      "export_z": 0.17,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Cartagena": {
+      "import_semana": 211821,
+      "baseline": 280693,
+      "cusum": -5.97,
+      "preliminar": {
+        "semana": "2026-10-25",
+        "z": -1.05,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "en_curso",
+          "inicio": "2026-10-18",
+          "semanas": 2
+        }
+      },
+      "firme": {
+        "semana": "2026-10-18",
+        "z": -1.0,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "nueva",
+          "inicio": "2026-10-18",
+          "semanas": 1
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 227984,
+      "export_baseline": 261115,
+      "export_z": -0.56,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Santa Marta": {
+      "import_semana": 83406,
+      "baseline": 71191,
+      "cusum": 0.0,
+      "preliminar": {
+        "semana": "2026-10-25",
+        "z": 0.23,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-18",
+        "z": 0.38,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 11125,
+      "export_baseline": 15177,
+      "export_z": -0.22,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    }
+  },
+  "sombra": {
+    "Barranquilla": {
+      "pronostico": [
+        145928,
+        145928,
+        145928,
+        145928
+      ]
+    },
+    "Buenaventura": {
+      "pronostico": [
+        222687,
+        222687,
+        222687,
+        222687
+      ]
+    },
+    "Cartagena": {
+      "pronostico": [
+        280693,
+        280693,
+        280693,
+        280693
+      ]
+    },
+    "Santa Marta": {
+      "pronostico": [
+        83406,
+        83406,
+        83406,
+        83406
+      ]
+    }
+  },
+  "sombra_error_mape_pct": {
+    "Barranquilla": 40.9,
+    "Buenaventura": 6.3,
+    "Cartagena": 34.1,
+    "Santa Marta": 28.8
+  }
+}
