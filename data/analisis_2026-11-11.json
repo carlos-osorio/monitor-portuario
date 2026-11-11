@@ -1,0 +1,179 @@
+{
+  "semana_analizada": "2026-11-01",
+  "excepcion_festiva": false,
+  "puertos": {
+    "Barranquilla": {
+      "import_semana": 48806,
+      "baseline": 145928,
+      "cusum": -5.63,
+      "preliminar": {
+        "semana": "2026-11-01",
+        "z": -1.69,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "nueva",
+          "inicio": "2026-11-01",
+          "semanas": 1
+        }
+      },
+      "firme": {
+        "semana": "2026-10-25",
+        "z": -1.05,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": true,
+      "nota_subida": false,
+      "export_semana": 56357,
+      "export_baseline": 55261,
+      "export_z": 0.02,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Buenaventura": {
+      "import_semana": 232542,
+      "baseline": 222693,
+      "cusum": -3.27,
+      "preliminar": {
+        "semana": "2026-11-01",
+        "z": 0.14,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-25",
+        "z": -0.33,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 170042,
+      "export_baseline": 18350,
+      "export_z": 13.11,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": true,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Cartagena": {
+      "import_semana": 364703,
+      "baseline": 280703,
+      "cusum": -4.34,
+      "preliminar": {
+        "semana": "2026-11-01",
+        "z": 1.29,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "cierre",
+          "cerrado_en": "2026-11-01"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-25",
+        "z": -1.05,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "en_curso",
+          "inicio": "2026-10-11",
+          "semanas": 3
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 386974,
+      "export_baseline": 261144,
+      "export_z": 2.14,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    },
+    "Santa Marta": {
+      "import_semana": 39788,
+      "baseline": 83405,
+      "cusum": -0.19,
+      "preliminar": {
+        "semana": "2026-11-01",
+        "z": -0.69,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "firme": {
+        "semana": "2026-10-25",
+        "z": 0.23,
+        "choque_caida": false,
+        "episodio": {
+          "estado": "normal"
+        }
+      },
+      "alerta_piso": false,
+      "nota_subida": false,
+      "export_semana": 27569,
+      "export_baseline": 15177,
+      "export_z": 0.98,
+      "export_choque_caida": false,
+      "export_alerta_piso": false,
+      "export_nota_subida": false,
+      "export_episodio": {
+        "estado": "normal"
+      }
+    }
+  },
+  "sombra": {
+    "Barranquilla": {
+      "pronostico": [
+        145928,
+        145928,
+        145928,
+        145928
+      ]
+    },
+    "Buenaventura": {
+      "pronostico": [
+        224557,
+        224557,
+        224557,
+        224557
+      ]
+    },
+    "Cartagena": {
+      "pronostico": [
+        280703,
+        280703,
+        280703,
+        280703
+      ]
+    },
+    "Santa Marta": {
+      "pronostico": [
+        83405,
+        83405,
+        83405,
+        83405
+      ]
+    }
+  },
+  "sombra_error_mape_pct": {
+    "Barranquilla": 199.0,
+    "Buenaventura": 4.2,
+    "Cartagena": 23.0,
+    "Santa Marta": 109.6
+  }
+}
